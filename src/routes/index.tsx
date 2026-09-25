@@ -65,7 +65,10 @@ function Index() {
     const values = trace.map((step) => step.output);
     if (!values.length) return Array.from({ length: 16 }, () => 0);
     const buckets = Array.from({ length: 16 }, () => 0);
-    values.forEach((value) => { buckets[Math.floor(value / 16)] += 1; });
+    values.forEach((value) => {
+      const bucketIndex = Math.floor(value / 16);
+      buckets[bucketIndex] = (buckets[bucketIndex] ?? 0) + 1;
+    });
     return buckets;
   }, [trace]);
 
